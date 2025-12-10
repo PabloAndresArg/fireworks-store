@@ -21,9 +21,19 @@
             <div class="carrito-total-container">
                 <h3>Total: <span id="carrito-total">Q0.00</span></h3>
             </div>
+            
+            <div class="customer-info">
+                <h4>Información del Cliente</h4>
+                <div class="input-group">
+                    <input type="text" id="nombre" placeholder="Nombre completo" required>
+                    <input type="email" id="correo" placeholder="Correo electrónico" required>
+                    <input type="tel" id="celular" placeholder="Número de celular" required>
+                </div>
+            </div>
+            
             <div class="carrito-actions">
                 <button class="btn-vaciar" onclick="vaciarCarrito()">Vaciar Carrito</button>
-                <button class="btn-checkout">Proceder al Pago</button>
+                <button class="btn-checkout">Generar Orden</button>
             </div>
         </div>
     </div>

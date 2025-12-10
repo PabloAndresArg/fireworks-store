@@ -432,6 +432,49 @@ h1::after {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.customer-info {
+    margin: 25px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+    border: 2px solid rgba(196, 30, 58, 0.1);
+}
+
+.customer-info h4 {
+    margin: 0 0 15px 0;
+    color: #2d5016;
+    font-size: 1.3em;
+    font-weight: 700;
+    text-align: center;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-group input {
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: 'Nunito', Arial, sans-serif;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #c41e3a;
+    box-shadow: 0 0 10px rgba(196, 30, 58, 0.2);
+    background: rgba(255, 255, 255, 1);
+}
+
+.input-group input::placeholder {
+    color: #999;
+}
+
 .carrito-actions {
     display: flex;
     gap: 20px;
@@ -534,6 +577,15 @@ h1::after {
     
     .cart-symbol {
         font-size: 24px;
+    }
+    
+    .input-group {
+        gap: 12px;
+    }
+    
+    .input-group input {
+        padding: 12px;
+        font-size: 14px;
     }
 }
 
