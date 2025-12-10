@@ -194,7 +194,7 @@ function renderizarProductos() {
 }
 
 function agregarAlCarrito(id) {
-  console.log("agregarAlCarrito")
+
   const producto = productos.find(p => p.id === id);
   const itemExistente = carrito.find(item => item.id === id);
 
@@ -209,7 +209,6 @@ function agregarAlCarrito(id) {
 
   actualizarCarrito();
   animarIconoCarrito();
-  alert(`${producto.titulo} agregado al carrito`);
 }
 
 function eliminarDelCarrito(id) {
