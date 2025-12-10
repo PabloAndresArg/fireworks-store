@@ -15,9 +15,10 @@ const productos = [
     },
     {
       id: 3,
-      titulo: "Volcán philicrackers",
+      titulo: "Caja Volcán philicrackers",
       descripcion: "",
-      precio: 14.99,
+      precio: 35,
+      precio_r: 30,
       imagen: "./assets/item3.jpeg"
     },
     {
@@ -57,7 +58,7 @@ const productos = [
     },
     {
       id: 9,
-      titulo: "Bateria de 3 luces",
+      titulo: "Bateria de 19 tiros",
       descripcion: "",
       precio: 100,
       imagen: "./assets/item9.jpeg"
@@ -101,7 +102,8 @@ const productos = [
       id: 15,
       titulo: "Mariposa",
       descripcion: "",
-      precio: 20,
+      precio: 22,
+      precio_r: 20,
       imagen: "./assets/item15.jpeg"
     },
     {
@@ -111,6 +113,62 @@ const productos = [
       precio: 25,
       imagen: "./assets/item16.jpeg"
     },
+    {
+      id: 17,
+      titulo: "Alegrias",
+      descripcion: "",
+      precio: 6,
+      precio_r: 5,
+      imagen: "./assets/item17.jpeg"
+    },
+    {
+      id: 18,
+      titulo: "Flores de fuego",
+      descripcion: "",
+      precio: 15,
+      precio_r: 10,
+      imagen: "./assets/item18.jpeg"
+    },
+    {
+      id: 19,
+      titulo: "Philicracker/diablios",
+      descripcion: "",
+      precio: 30,
+      precio_r: 25,
+      imagen: "./assets/item19.jpeg"
+    },
+    {
+      id: 20,
+      titulo: "Peonias y lloronas",
+      descripcion: "",
+      precio: 210,
+      precio_r: 200,
+      imagen: "./assets/item20.jpeg"
+    },
+    {
+      id: 21,
+      titulo: "Chiltepitos/diablos",
+      descripcion: "",
+      precio: 12,
+      precio_r: 10,
+      imagen: "./assets/item21.jpeg"
+    },
+    ,{
+      id: 22,
+      titulo: "Candelas",
+      descripcion: "",
+      precio: 6,
+      precio_r: 5,
+      imagen: "./assets/item22.jpeg"
+    },
+    ,{
+      id: 23,
+      titulo: "Rollo de ametralladora",
+      descripcion: "",
+      precio: 65,
+      precio_r: 60,
+      imagen: "./assets/item23.jpeg"
+    }
   ];
 
 function renderizarProductos() {
