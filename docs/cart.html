@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - Tienda de Fuegos Artificiales</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="cart-header">
+            <button class="btn-back" onclick="volverTienda()">← Volver a la Tienda</button>
+            <h1>Carrito de Compras</h1>
+        </div>
+        
+        <div id="carrito-items" class="carrito-items">
+            <!-- Los items del carrito se insertarán aquí -->
+        </div>
+        
+        <div class="carrito-footer">
+            <div class="carrito-total-container">
+                <h3>Total: <span id="carrito-total">Q0.00</span></h3>
+            </div>
+            <div class="carrito-actions">
+                <button class="btn-vaciar" onclick="vaciarCarrito()">Vaciar Carrito</button>
+                <button class="btn-checkout">Proceder al Pago</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
