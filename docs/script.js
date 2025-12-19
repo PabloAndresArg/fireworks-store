@@ -310,10 +310,22 @@ function volverTienda() {
 }
 
 function vaciarCarrito() {
-  if (confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
-    carrito = [];
-    actualizarCarrito();
-  }
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: '¿Quieres vaciar el carrito?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Sí, vaciar',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      carrito = [];
+      actualizarCarrito();
+      Swal.fire('¡Carrito vacío!', 'El carrito ha sido vaciado.', 'success');
+    }
+  });
 }
 
 // Load cart from localStorage
@@ -322,6 +334,131 @@ function cargarCarrito() {
   if (carritoGuardado) {
     carrito = JSON.parse(carritoGuardado);
   }
+}
+
+async function enviarOrden() {
+    // Validar que todos los campos estén completos
+    const nombre = document.getElementById('nombre').value.trim();
+    const correo = document.getElementById('correo').value.trim();
+    const celular = document.getElementById('celular').value.trim();
+    const fecha = document.getElementById('date').value;
+    
+    if (!nombre || !correo || !celular || !fecha) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Campos incompletos',
+            text: 'Por favor, complete todos los campos del cliente.'
+        });
+        return;
+    }
+    
+    // Validar que hay items en el carrito
+    if (carrito.length === 0) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Carrito vacío',
+            text: 'No hay productos en el carrito.'
+        });
+        return;
+    }
+    
+    // Mostrar loading
+    Swal.fire({
+        title: 'Enviando orden...',
+        text: 'Por favor espere mientras procesamos su orden.',
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+    
+    // Crear HTML formateado para el correo
+    const itemsHtml = carrito.map(item => `
+        <tr>
+            <td style="padding: 10px; border: 1px solid #ddd;">${item.titulo}</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">${item.cantidad}</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">Q${item.precio.toFixed(2)}</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">Q${(item.precio * item.cantidad).toFixed(2)}</td>
+        </tr>
+    `).join('');
+    
+    const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+    
+    const htmlContent = `
+        <h2 style="color: #333;">Nueva Orden de Fuegos Artificiales</h2>
+        
+        <h3 style="color: #555;">Información del Cliente:</h3>
+        <p><strong>Nombre:</strong> ${nombre}</p>
+        <p><strong>Correo:</strong> ${correo}</p>
+        <p><strong>Teléfono:</strong> ${celular}</p>
+        <p><strong>Fecha requerida:</strong> ${fecha}</p>
+        
+        <h3 style="color: #555; margin-top: 30px;">Productos Ordenados:</h3>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+            <thead>
+                <tr style="background-color: #f8f9fa;">
+                    <th style="padding: 12px; border: 1px solid #ddd; text-align: left;">Producto</th>
+                    <th style="padding: 12px; border: 1px solid #ddd; text-align: center;">Cantidad</th>
+                    <th style="padding: 12px; border: 1px solid #ddd; text-align: right;">Precio Unitario</th>
+                    <th style="padding: 12px; border: 1px solid #ddd; text-align: right;">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${itemsHtml}
+            </tbody>
+        </table>
+        
+        <div style="margin-top: 20px; text-align: right;">
+            <h3 style="color: #333; font-size: 24px;">Total: Q${total.toFixed(2)}</h3>
+        </div>
+        
+        <hr style="margin: 30px 0;">
+        <p style="color: #666; font-size: 14px;">
+            Esta orden fue generada automáticamente desde la tienda de fuegos artificiales.
+        </p>
+    `;
+    
+    // Preparar los datos para enviar
+    const orderData = {
+        subject: `Nueva orden de ${nombre} - ${celular}`,
+        html: htmlContent
+    };
+    
+    try {
+        const response = await fetch('https://vixrjxscxyutnzazmczp.supabase.co/functions/v1/send-email---fireworks-', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: orderData
+        });
+        
+        if (response.ok) {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Orden enviada!',
+                text: 'Su orden ha sido enviada exitosamente.',
+                confirmButtonText: 'Continuar'
+            }).then(() => {
+                // Limpiar carrito y formulario después del envío exitoso
+                carrito = [];
+                actualizarCarrito();
+                document.getElementById('nombre').value = '';
+                document.getElementById('correo').value = '';
+                document.getElementById('celular').value = '';
+                document.getElementById('date').value = '';
+            });
+        } else {
+            throw new Error('Error en el envío');
+        }
+    } catch (error) {
+        console.error('Error al enviar la orden:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error al enviar',
+            text: 'Hubo un problema al enviar la orden. Por favor, inténtelo de nuevo.'
+        });
+    }
 }
 
 // Renderizar los productos cuando se cargue la página

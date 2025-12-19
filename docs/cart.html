@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito de Compras - Tienda de Fuegos Artificiales</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="container">
@@ -28,12 +29,14 @@
                     <input type="text" id="nombre" placeholder="Nombre completo" required>
                     <input type="email" id="correo" placeholder="Correo electrónico" required>
                     <input type="tel" id="celular" placeholder="Número de celular" required>
+                    <label for="date" style="color: #667; font-size: 14px; margin-top: 10px;">Fecha requerida:</label>
+                    <input type="date" id="date" required>
                 </div>
             </div>
             
             <div class="carrito-actions">
                 <button class="btn-vaciar" onclick="vaciarCarrito()">Vaciar Carrito</button>
-                <button class="btn-checkout">Generar Orden</button>
+                <button class="btn-checkout" onclick="enviarOrden()" >Generar Orden</button>
             </div>
         </div>
     </div>
