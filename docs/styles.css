@@ -40,7 +40,7 @@ body::before {
     max-width: 1200px;
     margin: auto;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.95) !important;
     border-radius: 15px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
@@ -149,12 +149,12 @@ h1::after {
 }
 
 .producto:hover .producto-titulo {
-    color: white;
+    color: white !important;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .producto-descripcion {
-    color: #666;
+    color: #667;
     font-size: 0.95em;
     margin-bottom: 15px;
     line-height: 1.5;
@@ -170,7 +170,7 @@ h1::after {
 }
 
 .producto:hover .producto-precio {
-    color: white;
+    color: white !important;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -179,7 +179,7 @@ h1::after {
     width: 100%;
     padding: 12px;
     background: linear-gradient(135deg, #c41e3a, #a11729);
-    color: white;
+    color: white !important;
     text-align: center;
     border: none;
     border-radius: 25px;
