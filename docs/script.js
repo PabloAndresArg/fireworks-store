@@ -418,22 +418,17 @@ async function enviarOrden() {
         </p>
     `;
     
-    // Preparar los datos para enviar
-    const orderData = {
-        subject: `Nueva orden de ${nombre} - ${celular}`,
-        html: htmlContent
-    };
-    
+    // Use a simple POST without custom headers to avoid CORS preflight
     try {
         const response = await fetch('https://vixrjxscxyutnzazmczp.supabase.co/functions/v1/send-email---fireworks-', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: orderData
+            body: JSON.stringify({
+                subject: `Nueva orden de ${nombre} - ${celular}`,
+                html: htmlContent
+            })
         });
         
-        if (response.ok) {
+        if (response.ok || response.status === 200) {
             Swal.fire({
                 icon: 'success',
                 title: '¡Orden enviada!',
