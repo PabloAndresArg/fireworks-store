@@ -230,6 +230,12 @@ function actualizarCantidad(id, nuevaCantidad) {
 }
 
 function calcularTotal() {
+  const subtotal = carrito.reduce((total, item) => total + (item.precio * item.cantidad), 0);
+  const envio = carrito.length > 0 ? 30 : 0; // Solo agregar envío si hay productos
+  return subtotal + envio;
+}
+
+function calcularSubtotal() {
   return carrito.reduce((total, item) => total + (item.precio * item.cantidad), 0);
 }
 
@@ -237,6 +243,8 @@ function actualizarCarrito() {
   const contadorElement = document.getElementById('carrito-contador');
   const carritoContainer = document.getElementById('carrito-items');
   const totalElement = document.getElementById('carrito-total');
+  const subtotalElement = document.getElementById('carrito-subtotal');
+  const envioElement = document.getElementById('carrito-envio');
   
   // Update counter (for main page)
   if (contadorElement) {
@@ -281,9 +289,24 @@ function actualizarCarrito() {
     }
   }
   
+  // Calculate values
+  const subtotal = calcularSubtotal();
+  const envio = carrito.length > 0 ? 30 : 0;
+  const total = subtotal + envio;
+  
+  // Update subtotal (for cart page)
+  if (subtotalElement) {
+    subtotalElement.textContent = `Q${subtotal.toFixed(2)}`;
+  }
+  
+  // Update shipping (for cart page)
+  if (envioElement) {
+    envioElement.textContent = `Q${envio.toFixed(2)}`;
+  }
+  
   // Update total (for cart page)
   if (totalElement) {
-    totalElement.textContent = `Q${calcularTotal().toFixed(2)}`;
+    totalElement.textContent = `Q${total.toFixed(2)}`;
   }
   
   // Save cart to localStorage
@@ -382,7 +405,9 @@ async function enviarOrden() {
         </tr>
     `).join('');
     
-    const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+    const subtotal = calcularSubtotal();
+    const envio = 30;
+    const total = subtotal + envio;
     
     const htmlContent = `
         <h2 style="color: #333;">Nueva Orden de Fuegos Artificiales</h2>
@@ -408,8 +433,21 @@ async function enviarOrden() {
             </tbody>
         </table>
         
-        <div style="margin-top: 20px; text-align: right;">
-            <h3 style="color: #333; font-size: 24px;">Total: Q${total.toFixed(2)}</h3>
+        <div style="margin-top: 20px;">
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                    <td style="padding: 10px; text-align: right; font-weight: bold;">Subtotal:</td>
+                    <td style="padding: 10px; text-align: right; font-size: 18px;">Q${subtotal.toFixed(2)}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; text-align: right; font-weight: bold;">Envío:</td>
+                    <td style="padding: 10px; text-align: right; font-size: 18px;">Q${envio.toFixed(2)}</td>
+                </tr>
+                <tr style="border-top: 2px solid #333;">
+                    <td style="padding: 15px; text-align: right; font-weight: bold; font-size: 20px;">Total:</td>
+                    <td style="padding: 15px; text-align: right; font-size: 24px; font-weight: bold; color: #c41e3a;">Q${total.toFixed(2)}</td>
+                </tr>
+            </table>
         </div>
         
         <hr style="margin: 30px 0;">
@@ -431,8 +469,8 @@ async function enviarOrden() {
         if (response.ok || response.status === 200) {
             Swal.fire({
                 icon: 'success',
-                title: '¡Orden enviada!',
-                text: 'Su orden ha sido enviada exitosamente.',
+                title: '¡Orden enviada Exitosamente!',
+                text: 'Nos pondremos en contacto contigo pronto.',
                 confirmButtonText: 'Continuar'
             }).then(() => {
                 // Limpiar carrito y formulario después del envío exitoso

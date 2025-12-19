@@ -423,8 +423,30 @@ h1::after {
     margin-bottom: 25px;
 }
 
+.total-breakdown {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid rgba(196, 30, 58, 0.1);
+}
+
+.subtotal-line,
+.envio-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+    color: #666;
+}
+
+.subtotal-line span:last-child,
+.envio-line span:last-child {
+    font-weight: 600;
+    color: #333;
+}
+
 .carrito-total-container h3 {
-    margin: 0;
+    margin: 10px 0 0 0;
     color: #c41e3a;
     font-size: 2em;
     font-weight: 700;
