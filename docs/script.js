@@ -22,13 +22,6 @@ const productos = [
     imagen: "./assets/item4.jpeg"
   },
   {
-    id: 5,
-    titulo: "Pili Crackers",
-    descripcion: "",
-    precio: 20,
-    imagen: "./assets/item5.jpeg"
-  },
-  {
     id: 6,
     titulo: "Barriles",
     descripcion: "",
