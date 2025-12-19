@@ -7,13 +7,6 @@ const productos = [
     imagen: "./assets/item1.jpeg"
   },
   {
-    id: 2,
-    titulo: "Batería de 19 disparos",
-    descripcion: "",
-    precio: 200,
-    imagen: "./assets/item2.jpeg"
-  },
-  {
     id: 3,
     titulo: "Caja Volcán philicrackers",
     descripcion: "",
@@ -168,6 +161,14 @@ const productos = [
     precio: 65,
     precio_r: 60,
     imagen: "./assets/item23.jpeg"
+  },
+  {
+    id: 24,
+    titulo: "Misil Cracker de 25 tiros",
+    descripcion: "",
+    precio: 30,
+    precio_r: 25,
+    imagen: "./assets/item24.jpeg"
   }
 ];
 
