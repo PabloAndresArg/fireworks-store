@@ -180,33 +180,55 @@ function renderizarProductos() {
   productos.forEach(producto => {
     const productoElement = document.createElement('div');
     productoElement.className = 'producto';
+    
+    // Get current quantity for this product
+    const itemEnCarrito = carrito.find(item => item.id === producto.id);
+    const cantidadActual = itemEnCarrito ? itemEnCarrito.cantidad : 0;
+    
     productoElement.innerHTML = `
             <img src="${producto.imagen}" alt="${producto.titulo}">
             <div class="producto-info">
                 <h2 class="producto-titulo">${producto.titulo}</h2>
                 <p class="producto-descripcion">${producto.descripcion}</p>
                 <p class="producto-precio">Q${producto.precio.toFixed(2)}</p>
-                <button class="btn-agregar" onclick="agregarAlCarrito(${producto.id})">Agregar al Carrito</button>
+                <div class="producto-cantidad">
+                    <button class="btn-cantidad" onclick="cambiarCantidadProducto(${producto.id}, -1)">-</button>
+                    <span class="cantidad-display" id="cantidad-${producto.id}">${cantidadActual}</span>
+                    <button class="btn-cantidad" onclick="cambiarCantidadProducto(${producto.id}, 1)">+</button>
+                </div>
             </div>
         `;
     contenedor.appendChild(productoElement);
   });
 }
 
-function agregarAlCarrito(id) {
-
-  const producto = productos.find(p => p.id === id);
+function cambiarCantidadProducto(id, cambio) {
   const itemExistente = carrito.find(item => item.id === id);
-
-  if (itemExistente) {
-    itemExistente.cantidad += 1;
+  const cantidadActual = itemExistente ? itemExistente.cantidad : 0;
+  const nuevaCantidad = cantidadActual + cambio;
+  
+  if (nuevaCantidad <= 0) {
+    // Remove from cart if quantity becomes 0 or less
+    carrito = carrito.filter(item => item.id !== id);
   } else {
-    carrito.push({
-      ...producto,
-      cantidad: 1
-    });
+    if (itemExistente) {
+      itemExistente.cantidad = nuevaCantidad;
+    } else {
+      // Add new item to cart
+      const producto = productos.find(p => p.id === id);
+      carrito.push({
+        ...producto,
+        cantidad: nuevaCantidad
+      });
+    }
   }
-
+  
+  // Update the display for this specific product
+  const cantidadDisplay = document.getElementById(`cantidad-${id}`);
+  if (cantidadDisplay) {
+    cantidadDisplay.textContent = Math.max(0, nuevaCantidad);
+  }
+  
   actualizarCarrito();
   animarIconoCarrito();
 }
@@ -231,7 +253,7 @@ function actualizarCantidad(id, nuevaCantidad) {
 
 function calcularTotal() {
   const subtotal = carrito.reduce((total, item) => total + (item.precio * item.cantidad), 0);
-  const envio = carrito.length > 0 ? 30 : 0; // Solo agregar envío si hay productos
+  const envio = carrito.length > 0 ? 30 : 0;
   return subtotal + envio;
 }
 
@@ -258,6 +280,16 @@ function actualizarCarrito() {
       contadorElement.style.display = 'flex';
     }
   }
+  
+  // Update quantity displays on main page
+  productos.forEach(producto => {
+    const cantidadDisplay = document.getElementById(`cantidad-${producto.id}`);
+    if (cantidadDisplay) {
+      const itemEnCarrito = carrito.find(item => item.id === producto.id);
+      const cantidadActual = itemEnCarrito ? itemEnCarrito.cantidad : 0;
+      cantidadDisplay.textContent = cantidadActual;
+    }
+  });
   
   // Update cart items (for cart page)
   if (carritoContainer) {
@@ -324,7 +356,6 @@ function animarIconoCarrito() {
 }
 
 function goToCar() {
-  // Navigate to cart page
   window.location.href = 'cart.html';
 }
 
@@ -351,7 +382,6 @@ function vaciarCarrito() {
   });
 }
 
-// Load cart from localStorage
 function cargarCarrito() {
   const carritoGuardado = localStorage.getItem('carrito');
   if (carritoGuardado) {
@@ -360,7 +390,6 @@ function cargarCarrito() {
 }
 
 async function enviarOrden() {
-    // Validar que todos los campos estén completos
     const nombre = document.getElementById('nombre').value.trim();
     const correo = document.getElementById('correo').value.trim();
     const celular = document.getElementById('celular').value.trim();
@@ -375,7 +404,6 @@ async function enviarOrden() {
         return;
     }
     
-    // Validar que hay items en el carrito
     if (carrito.length === 0) {
         Swal.fire({
             icon: 'warning',
@@ -385,7 +413,6 @@ async function enviarOrden() {
         return;
     }
     
-    // Mostrar loading
     Swal.fire({
         title: 'Enviando orden...',
         text: 'Por favor espere mientras procesamos su orden.',
@@ -395,7 +422,6 @@ async function enviarOrden() {
         }
     });
     
-    // Crear HTML formateado para el correo
     const itemsHtml = carrito.map(item => `
         <tr>
             <td style="padding: 10px; border: 1px solid #ddd;">${item.titulo}</td>
@@ -456,7 +482,6 @@ async function enviarOrden() {
         </p>
     `;
     
-    // Use a simple POST without custom headers to avoid CORS preflight
     try {
         const response = await fetch('https://vixrjxscxyutnzazmczp.supabase.co/functions/v1/send-email---fireworks-', {
             method: 'POST',
@@ -473,7 +498,6 @@ async function enviarOrden() {
                 text: 'Nos pondremos en contacto contigo pronto.',
                 confirmButtonText: 'Continuar'
             }).then(() => {
-                // Limpiar carrito y formulario después del envío exitoso
                 carrito = [];
                 actualizarCarrito();
                 document.getElementById('nombre').value = '';
@@ -494,18 +518,15 @@ async function enviarOrden() {
     }
 }
 
-// Renderizar los productos cuando se cargue la página
 document.addEventListener('DOMContentLoaded', function () {
   cargarCarrito();
   
   if (document.getElementById('productos-container')) {
-    // Estamos en la página principal
     renderizarProductos();
   }
   
   actualizarCarrito();
 
-  // Add click event to cart icon
   const cartIcon = document.getElementById('cart-icon');
   if (cartIcon) {
     cartIcon.addEventListener('click', goToCar);
