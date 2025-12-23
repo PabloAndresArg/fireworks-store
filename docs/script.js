@@ -182,6 +182,13 @@ const productos = [
     precio_r: 200,
     imagen: "./assets/item20.jpeg"
   },
+  {
+    id: 27,
+    titulo: "Misil de 49 tiros",
+    descripcion: "",
+    precio: 45,
+    imagen: "./assets/item1.jpeg"
+  },
 ];
 
 // Cart state
