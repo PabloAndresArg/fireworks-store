@@ -18,7 +18,8 @@ const productos = [
     id: 4,
     titulo: "Super Tronadores",
     descripcion: "",
-    precio: 25,
+    precio: 30,
+    precio_r: 25,
     imagen: "./assets/item4.jpeg"
   },
   {
@@ -53,7 +54,8 @@ const productos = [
     id: 10,
     titulo: "Paquete de estrellitas",
     descripcion: "",
-    precio: 20,
+    precio: 25,
+    precio_r: 20,
     imagen: "./assets/item10.jpeg"
   },
   {
@@ -74,7 +76,8 @@ const productos = [
     id: 13,
     titulo: "Color smoke",
     descripcion: "",
-    precio: 10,
+    precio: 12.50,
+    precio_r: 10,
     imagen: "./assets/item13.jpeg"
   },
   {
@@ -94,9 +97,9 @@ const productos = [
   },
   {
     id: 16,
-    titulo: "Estrillitas",
+    titulo: "Estrillitas Gigantes",
     descripcion: "",
-    precio: 25,
+    precio: 30,
     imagen: "./assets/item16.jpeg"
   },
   {
@@ -125,9 +128,9 @@ const productos = [
   },
   {
     id: 20,
-    titulo: "Peonias y lloronas",
+    titulo: "Peonias",
     descripcion: "",
-    precio: 210,
+    precio: 240,
     precio_r: 200,
     imagen: "./assets/item20.jpeg"
   },
@@ -162,7 +165,23 @@ const productos = [
     precio: 30,
     precio_r: 25,
     imagen: "./assets/item24.jpeg"
-  }
+  },
+  {
+    id: 25,
+    titulo: "Varita de 80 tiros",
+    descripcion: "",
+    precio: 25,
+    precio_r: 20,
+    imagen: "./assets/item25.jpeg"
+  },
+  {
+    id: 26,
+    titulo: "Lorronas",
+    descripcion: "",
+    precio: 240,
+    precio_r: 200,
+    imagen: "./assets/item20.jpeg"
+  },
 ];
 
 // Cart state
@@ -174,11 +193,11 @@ function renderizarProductos() {
   productos.forEach(producto => {
     const productoElement = document.createElement('div');
     productoElement.className = 'producto';
-    
+
     // Get current quantity for this product
     const itemEnCarrito = carrito.find(item => item.id === producto.id);
     const cantidadActual = itemEnCarrito ? itemEnCarrito.cantidad : 0;
-    
+
     productoElement.innerHTML = `
             <img src="${producto.imagen}" alt="${producto.titulo}">
             <div class="producto-info">
@@ -200,7 +219,7 @@ function cambiarCantidadProducto(id, cambio) {
   const itemExistente = carrito.find(item => item.id === id);
   const cantidadActual = itemExistente ? itemExistente.cantidad : 0;
   const nuevaCantidad = cantidadActual + cambio;
-  
+
   if (nuevaCantidad <= 0) {
     // Remove from cart if quantity becomes 0 or less
     carrito = carrito.filter(item => item.id !== id);
@@ -216,13 +235,13 @@ function cambiarCantidadProducto(id, cambio) {
       });
     }
   }
-  
+
   // Update the display for this specific product
   const cantidadDisplay = document.getElementById(`cantidad-${id}`);
   if (cantidadDisplay) {
     cantidadDisplay.textContent = Math.max(0, nuevaCantidad);
   }
-  
+
   actualizarCarrito();
   animarIconoCarrito();
 }
@@ -261,7 +280,7 @@ function actualizarCarrito() {
   const totalElement = document.getElementById('carrito-total');
   const subtotalElement = document.getElementById('carrito-subtotal');
   const envioElement = document.getElementById('carrito-envio');
-  
+
   // Update counter (for main page)
   if (contadorElement) {
     const totalItems = carrito.reduce((total, item) => total + item.cantidad, 0);
@@ -274,7 +293,7 @@ function actualizarCarrito() {
       contadorElement.style.display = 'flex';
     }
   }
-  
+
   // Update quantity displays on main page
   productos.forEach(producto => {
     const cantidadDisplay = document.getElementById(`cantidad-${producto.id}`);
@@ -284,11 +303,11 @@ function actualizarCarrito() {
       cantidadDisplay.textContent = cantidadActual;
     }
   });
-  
+
   // Update cart items (for cart page)
   if (carritoContainer) {
     carritoContainer.innerHTML = '';
-    
+
     if (carrito.length === 0) {
       carritoContainer.innerHTML = '<div class="carrito-vacio"><h3>El carrito está vacío</h3><p>No hay productos en tu carrito</p></div>';
     } else {
@@ -314,27 +333,27 @@ function actualizarCarrito() {
       });
     }
   }
-  
+
   // Calculate values
   const subtotal = calcularSubtotal();
   const envio = carrito.length > 0 ? 30 : 0;
   const total = subtotal + envio;
-  
+
   // Update subtotal (for cart page)
   if (subtotalElement) {
     subtotalElement.textContent = `Q${subtotal.toFixed(2)}`;
   }
-  
+
   // Update shipping (for cart page)
   if (envioElement) {
     envioElement.textContent = `Q${envio.toFixed(2)}`;
   }
-  
+
   // Update total (for cart page)
   if (totalElement) {
     totalElement.textContent = `Q${total.toFixed(2)}`;
   }
-  
+
   // Save cart to localStorage
   localStorage.setItem('carrito', JSON.stringify(carrito));
 }
@@ -384,39 +403,39 @@ function cargarCarrito() {
 }
 
 async function enviarOrden() {
-    const nombre = document.getElementById('nombre').value.trim();
-    const correo = document.getElementById('correo').value.trim();
-    const celular = document.getElementById('celular').value.trim();
-    const fecha = document.getElementById('date').value;
-    
-    if (!nombre || !correo || !celular || !fecha) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Campos incompletos',
-            text: 'Por favor, complete todos los campos del cliente.'
-        });
-        return;
-    }
-    
-    if (carrito.length === 0) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'Carrito vacío',
-            text: 'No hay productos en el carrito.'
-        });
-        return;
-    }
-    
+  const nombre = document.getElementById('nombre').value.trim();
+  const correo = document.getElementById('correo').value.trim();
+  const celular = document.getElementById('celular').value.trim();
+  const fecha = document.getElementById('date').value;
+
+  if (!nombre || !correo || !celular || !fecha) {
     Swal.fire({
-        title: 'Enviando orden...',
-        text: 'Por favor espere mientras procesamos su orden.',
-        allowOutsideClick: false,
-        didOpen: () => {
-            Swal.showLoading();
-        }
+      icon: 'error',
+      title: 'Campos incompletos',
+      text: 'Por favor, complete todos los campos del cliente.'
     });
-    
-    const itemsHtml = carrito.map(item => `
+    return;
+  }
+
+  if (carrito.length === 0) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Carrito vacío',
+      text: 'No hay productos en el carrito.'
+    });
+    return;
+  }
+
+  Swal.fire({
+    title: 'Enviando orden...',
+    text: 'Por favor espere mientras procesamos su orden.',
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading();
+    }
+  });
+
+  const itemsHtml = carrito.map(item => `
         <tr>
             <td style="padding: 10px; border: 1px solid #ddd;">${item.titulo}</td>
             <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">${item.cantidad}</td>
@@ -424,12 +443,12 @@ async function enviarOrden() {
             <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">Q${(item.precio * item.cantidad).toFixed(2)}</td>
         </tr>
     `).join('');
-    
-    const subtotal = calcularSubtotal();
-    const envio = 30;
-    const total = subtotal + envio;
-    
-    const htmlContent = `
+
+  const subtotal = calcularSubtotal();
+  const envio = 30;
+  const total = subtotal + envio;
+
+  const htmlContent = `
         <h2 style="color: #333;">Nueva Orden de Fuegos Artificiales</h2>
         
         <h3 style="color: #555;">Información del Cliente:</h3>
@@ -475,50 +494,50 @@ async function enviarOrden() {
             Esta orden fue generada automáticamente desde la tienda de fuegos artificiales.
         </p>
     `;
-    
-    try {
-        const response = await fetch('https://vixrjxscxyutnzazmczp.supabase.co/functions/v1/send-email---fireworks-', {
-            method: 'POST',
-            body: JSON.stringify({
-                subject: `Nueva orden de ${nombre} - ${celular}`,
-                html: htmlContent
-            })
-        });
-        
-        if (response.ok || response.status === 200) {
-            Swal.fire({
-                icon: 'success',
-                title: '¡Orden enviada Exitosamente!',
-                text: 'Nos pondremos en contacto contigo pronto.',
-                confirmButtonText: 'Continuar'
-            }).then(() => {
-                carrito = [];
-                actualizarCarrito();
-                document.getElementById('nombre').value = '';
-                document.getElementById('correo').value = '';
-                document.getElementById('celular').value = '';
-                document.getElementById('date').value = '';
-            });
-        } else {
-            throw new Error('Error en el envío');
-        }
-    } catch (error) {
-        console.error('Error al enviar la orden:', error);
-        Swal.fire({
-            icon: 'error',
-            title: 'Error al enviar',
-            text: 'Hubo un problema al enviar la orden. Por favor, inténtelo de nuevo.'
-        });
+
+  try {
+    const response = await fetch('https://vixrjxscxyutnzazmczp.supabase.co/functions/v1/send-email---fireworks-', {
+      method: 'POST',
+      body: JSON.stringify({
+        subject: `Nueva orden de ${nombre} - ${celular}`,
+        html: htmlContent
+      })
+    });
+
+    if (response.ok || response.status === 200) {
+      Swal.fire({
+        icon: 'success',
+        title: '¡Orden enviada Exitosamente!',
+        text: 'Nos pondremos en contacto contigo pronto.',
+        confirmButtonText: 'Continuar'
+      }).then(() => {
+        carrito = [];
+        actualizarCarrito();
+        document.getElementById('nombre').value = '';
+        document.getElementById('correo').value = '';
+        document.getElementById('celular').value = '';
+        document.getElementById('date').value = '';
+      });
+    } else {
+      throw new Error('Error en el envío');
     }
+  } catch (error) {
+    console.error('Error al enviar la orden:', error);
+    Swal.fire({
+      icon: 'error',
+      title: 'Error al enviar',
+      text: 'Hubo un problema al enviar la orden. Por favor, inténtelo de nuevo.'
+    });
+  }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
   cargarCarrito();
-  
+
   if (document.getElementById('productos-container')) {
     renderizarProductos();
   }
-  
+
   actualizarCarrito();
 
   const cartIcon = document.getElementById('cart-icon');
