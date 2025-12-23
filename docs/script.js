@@ -186,8 +186,15 @@ const productos = [
     id: 27,
     titulo: "Misil de 49 tiros",
     descripcion: "",
-    precio: 45,
+    precio: 50,
     imagen: "./assets/item1.jpeg"
+  },
+    {
+    id: 28,
+    titulo: "6 estrellitas pequeñas",
+    descripcion: "",
+    precio: 25,
+    imagen: "./assets/item27.jpeg"
   },
 ];
 
