@@ -3,7 +3,7 @@ const productos = [
     id: 1,
     titulo: "Misil de 36 tiros",
     descripcion: "",
-    precio: 20,
+    precio: 40,
     imagen: "./assets/item1.jpeg"
   },
   {
