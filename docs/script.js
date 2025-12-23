@@ -26,7 +26,7 @@ const productos = [
     id: 6,
     titulo: "Barriles",
     descripcion: "",
-    precio: 15,
+    precio: 30,
     imagen: "./assets/item6.jpeg"
   },
   {
