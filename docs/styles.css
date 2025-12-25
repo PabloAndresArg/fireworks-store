@@ -218,6 +218,15 @@ h1::after {
     box-shadow: 0 8px 25px rgba(34, 139, 34, 0.4);
 }
 
+.producto:hover .producto-descripcion {
+    color: white;
+    transition: color 0.3s ease;
+}
+
+/* Optional: Add transition for smooth effect */
+.producto-descripcion {
+    transition: color 0.3s ease;
+}
 .btn-video {
     display: block;
     width: 100%;
