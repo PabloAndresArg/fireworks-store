@@ -138,7 +138,7 @@ const productos = [
   {
     id: 21,
     titulo: "Chiltepitos/diablos",
-    descripcion: "Pequeños pero potentes petardos con sonido característico. Perfectos para crear ambiente de fiesta tradicional.",
+    descripcion: "Bolsita de Pequeños chiltepitos pero potentes petardos con sonido característico. Perfectos para crear ambiente de fiesta tradicional.",
     precio: 12,
     precio_r: 10,
     imagen: "./assets/item21.jpeg"
