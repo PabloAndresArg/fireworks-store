@@ -4,6 +4,7 @@ const productos = [
     titulo: "Misil de 36 tiros",
     descripcion: "Espectacular batería de 36 disparos consecutivos con efectos multicolor y destellos dorados. Ideal para celebraciones grandes.",
     precio: 40,
+    precio_r: 40,
     imagen: "./assets/item1.jpeg"
   },
   {
@@ -27,6 +28,7 @@ const productos = [
     titulo: "Barriles",
     descripcion: "Barril con efectos de lluvia dorada y colores vibrantes. Duración prolongada.",
     precio: 30,
+    precio_r: 25,
     imagen: "./assets/item6.jpeg"
   },
   {
@@ -34,6 +36,7 @@ const productos = [
     titulo: "Girasoles",
     descripcion: "Caja de Girasoles con hermosos efectos giratorios con chispas doradas y verdes. Perfectos para decoración.",
     precio: 10,
+    precio_r: 10,
     imagen: "./assets/item7.jpeg"
   },
   {
@@ -41,6 +44,7 @@ const productos = [
     titulo: "Colita de Raton",
     descripcion: "Clásicos fuegos artificiales con efecto serpenteante y chispas plateadas. Diversión garantizada para toda la familia.",
     precio: 20,
+    precio_r: 20,
     imagen: "./assets/item8.jpeg"
   },
   {
@@ -48,6 +52,7 @@ const productos = [
     titulo: "Bateria de 19 tiros",
     descripcion: "Impresionante batería de 19 disparos con efectos variados: palmeras, crisantemos y efectos multicolor en secuencia.",
     precio: 100,
+    precio_r: 100,
     imagen: "./assets/item9.jpeg"
   },
   {
@@ -63,6 +68,7 @@ const productos = [
     titulo: "Volcan Grande",
     descripcion: "Volcán de gran tamaño con efectos continuos de chispas doradas y plateadas. Espectáculo visual impresionante.",
     precio: 20,
+    precio_r: 20,
     imagen: "./assets/item11.jpeg"
   },
   {
@@ -70,6 +76,7 @@ const productos = [
     titulo: "Palitos de chispas",
     descripcion: "Bengalas tradicionales de mano con chispas doradas brillantes. Ideales para niños y celebraciones íntimas.",
     precio: 15,
+    precio_r: 20,
     imagen: "./assets/item12.jpeg"
   },
   {
@@ -84,14 +91,15 @@ const productos = [
     id: 14,
     titulo: "Trompos",
     descripcion: "Fuegos artificiales giratorios que crean patrones circulares de chispas multicolor mientras giran sobre el suelo.",
-    precio: 10,
+    precio: 12.5,
+    precio_r: 10,
     imagen: "./assets/item14.jpeg"
   },
   {
     id: 15,
     titulo: "Mariposa",
     descripcion: "Elegantes fuegos artificiales con efectos que imitan el vuelo de mariposas con chispas doradas y plateadas.",
-    precio: 22,
+    precio: 25,
     precio_r: 20,
     imagen: "./assets/item15.jpeg"
   },
@@ -100,6 +108,7 @@ const productos = [
     titulo: "Estrillitas Gigantes",
     descripcion: "Bengalas de gran tamaño con duración extendida y chispas extra brillantes. Perfectas para grandes celebraciones.",
     precio: 30,
+    precio_r: 25,
     imagen: "./assets/item16.jpeg"
   },
   {
@@ -153,7 +162,7 @@ const productos = [
   },
   {
     id: 23,
-    titulo: "Rollo de ametralladora",
+    titulo: "Rollo de ametralladora 10 mts",
     descripcion: "Secuencia continua de pequeñas explosiones que imitan el sonido de ametralladora. Efecto sonoro impresionante.",
     precio: 65,
     precio_r: 60,
@@ -189,6 +198,7 @@ const productos = [
     titulo: "Misil de 49 tiros",
     descripcion: "Batería profesional de 49 disparos con efectos premium multicolor. Para celebraciones que requieren máximo espectáculo.",
     precio: 50,
+    precio_r: 50,
     imagen: "./assets/item1.jpeg"
   },
   {
@@ -196,6 +206,7 @@ const productos = [
     titulo: "6 estrellitas pequeñas",
     descripcion: "Pack de 6 bengalas pequeñas perfectas para niños y celebraciones íntimas. Seguras y fáciles de usar.",
     precio: 25,
+    precio_r: 25,
     imagen: "./assets/item27.jpeg"
   },
 ];
@@ -293,7 +304,9 @@ function actualizarCantidad(id, nuevaCantidad) {
 }
 
 function calcularTotal() {
-  return carrito.reduce((total, item) => total + (item.precio * item.cantidad), 0);
+  const subtotal = carrito.reduce((total, item) => total + (item.precio * item.cantidad), 0);
+  const envio = 30; // Costo fijo de envío
+  return subtotal + envio;
 }
 
 function calcularSubtotal() {
@@ -359,12 +372,13 @@ function actualizarCarrito() {
     }
   }
 
-  // Calculate total
+  // Calculate subtotal and total
+  const subtotal = calcularSubtotal();
   const total = calcularTotal();
 
   // Update subtotal (for cart page)
   if (subtotalElement) {
-    subtotalElement.textContent = `Q${total.toFixed(2)}`;
+    subtotalElement.textContent = `Q${subtotal.toFixed(2)}`;
   }
 
   // Update total (for cart page)
