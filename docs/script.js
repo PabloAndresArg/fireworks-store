@@ -314,7 +314,7 @@ function actualizarCantidad(id, nuevaCantidad) {
 function calcularTotal() {
   const subtotal = carrito.reduce((total, item) => total + (item.precio * item.cantidad), 0);
   const envio = 30; // Costo fijo de envío
-  return subtotal + envio;
+  return [subtotal, subtotal + envio];
 }
 
 function calcularSubtotal() {
@@ -381,8 +381,7 @@ function actualizarCarrito() {
   }
 
   // Calculate subtotal and total
-  const subtotal = calcularSubtotal();
-  const total = calcularTotal();
+  const [subtotal,total] = calcularTotal();
 
   // Update subtotal (for cart page)
   if (subtotalElement) {
@@ -464,13 +463,13 @@ async function enviarOrden() {
     });
     return;
   }
-
-  const total = calcularTotal();
-  if (total < 100) {
+  const monto_minimo = 50;
+  const [subtotal, total] = calcularTotal();
+  if (total < 80) {
     Swal.fire({
       icon: 'warning',
       title: 'Monto mínimo requerido',
-      text: `El monto mínimo para realizar un pedido es de Q100 incluyendo envio. Tu pedido actual es de Q${total.toFixed(2)}.`,
+      text: `El monto mínimo para realizar un pedido es de Q${monto_minimo}. Tu pedido actual es de Q${subtotal.toFixed(2)}.`,
       confirmButtonText: 'Entendido'
     });
     return;
