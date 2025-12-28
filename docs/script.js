@@ -37,7 +37,7 @@ const productos = [
     descripcion: "Caja de Girasoles con hermosos efectos giratorios con chispas doradas y verdes. Perfectos para decoración.",
     precio: 10,
     precio_r: 10,
-    imagen: "./assets/item7.jpeg"
+    imagen: "./assets/item14.jpeg"
   },
   {
     id: 8,
@@ -74,16 +74,16 @@ const productos = [
   {
     id: 12,
     titulo: "Palitos de chispas",
-    descripcion: "Bengalas tradicionales de mano con chispas doradas brillantes. Ideales para niños y celebraciones íntimas.",
+    descripcion: "Bengalas tradicionales de mano con chispas doradas brillantes. Ideales para niños",
     precio: 15,
     precio_r: 20,
     imagen: "./assets/item12.jpeg"
   },
   {
     id: 13,
-    titulo: "Color smoke",
+    titulo: "Color smoke o Tronadores",
     descripcion: "Bomba de humo colorido disponible en varios colores vibrantes. Perfecta para efectos fotográficos y celebraciones.",
-    precio: 12.50,
+    precio: 15,
     precio_r: 10,
     imagen: "./assets/item13.jpeg"
   },
@@ -91,9 +91,9 @@ const productos = [
     id: 14,
     titulo: "Trompos",
     descripcion: "Fuegos artificiales giratorios que crean patrones circulares de chispas multicolor mientras giran sobre el suelo.",
-    precio: 12.5,
+    precio: 15,
     precio_r: 10,
-    imagen: "./assets/item14.jpeg"
+    imagen: "./assets/trompos.png"
   },
   {
     id: 15,
@@ -106,7 +106,7 @@ const productos = [
   {
     id: 16,
     titulo: "Estrillitas Gigantes",
-    descripcion: "Bengalas de gran tamaño con duración extendida y chispas extra brillantes. Perfectas para grandes celebraciones.",
+    descripcion: "Paquete de bengalas de gran tamaño con duración extendida y chispas extra brillantes. Perfectas para grandes celebraciones.",
     precio: 30,
     precio_r: 25,
     imagen: "./assets/item16.jpeg"
@@ -148,7 +148,7 @@ const productos = [
     id: 21,
     titulo: "Chiltepitos/diablos",
     descripcion: "Bolsita de Pequeños chiltepitos pero potentes petardos con sonido característico. Perfectos para crear ambiente de fiesta tradicional.",
-    precio: 12,
+    precio: 15,
     precio_r: 10,
     imagen: "./assets/item21.jpeg"
   },
@@ -164,7 +164,7 @@ const productos = [
     id: 23,
     titulo: "Rollo de ametralladora 10 mts",
     descripcion: "Secuencia continua de pequeñas explosiones que imitan el sonido de ametralladora. Efecto sonoro impresionante.",
-    precio: 65,
+    precio: 80,
     precio_r: 60,
     imagen: "./assets/item23.jpeg"
   },
@@ -197,7 +197,7 @@ const productos = [
     id: 27,
     titulo: "Misil de 49 tiros",
     descripcion: "Batería profesional de 49 disparos con efectos premium multicolor. Para celebraciones que requieren máximo espectáculo.",
-    precio: 50,
+    precio: 60,
     precio_r: 50,
     imagen: "./assets/item1.jpeg"
   },
@@ -205,9 +205,17 @@ const productos = [
     id: 28,
     titulo: "6 estrellitas pequeñas",
     descripcion: "Pack de 6 bengalas pequeñas perfectas para niños y celebraciones íntimas. Seguras y fáciles de usar.",
-    precio: 25,
-    precio_r: 25,
+    precio: 30,
+    precio_r: 15,
     imagen: "./assets/item27.jpeg"
+  },
+  {
+    id: 29,
+    titulo: "Rollo de ametralladora 5 mts",
+    descripcion: "Secuencia continua de pequeñas explosiones que imitan el sonido de ametralladora. Efecto sonoro impresionante.",
+    precio: 45,
+    precio_r: 30,
+    imagen: "./assets/item23.jpeg"
   },
 ];
 
@@ -439,7 +447,7 @@ async function enviarOrden() {
   const celular = document.getElementById('celular').value.trim();
   const fecha = document.getElementById('date').value;
 
-  if (!nombre  || !celular || !fecha) {
+  if (!nombre || !celular || !fecha) {
     Swal.fire({
       icon: 'error',
       title: 'Campos incompletos',
@@ -458,11 +466,11 @@ async function enviarOrden() {
   }
 
   const total = calcularTotal();
-  if (total < 200) {
+  if (total < 100) {
     Swal.fire({
       icon: 'warning',
       title: 'Monto mínimo requerido',
-      text: `El monto mínimo para realizar un pedido es de Q200. Tu pedido actual es de Q${total.toFixed(2)}.`,
+      text: `El monto mínimo para realizar un pedido es de Q100 incluyendo envio. Tu pedido actual es de Q${total.toFixed(2)}.`,
       confirmButtonText: 'Entendido'
     });
     return;
