@@ -489,16 +489,21 @@ async function enviarOrden() {
             <td style="padding: 10px; border: 1px solid #ddd;">${item.titulo}</td>
             <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">${item.cantidad}</td>
             <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">Q${item.precio.toFixed(2)}</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">Q${item.precio_r.toFixed(2)}</td>
             <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">Q${(item.precio * item.cantidad).toFixed(2)}</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: right;">Q${(item.precio_r * item.cantidad).toFixed(2)}</td>
         </tr>
     `).join('');
+
+  // Calculate totals
+  const totalPrecioR = carrito.reduce((total, item) => total + (item.precio_r * item.cantidad), 0);
+  const ganancia = subtotal - totalPrecioR;
 
   const htmlContent = `
         <h2 style="color: #333;">Nueva Orden de Fuegos Artificiales</h2>
         
         <h3 style="color: #555;">Información del Cliente:</h3>
         <p><strong>Nombre:</strong> ${nombre}</p>
-        <p><strong>Correo:</strong> ${correo}</p>
         <p><strong>Teléfono:</strong> ${celular}</p>
         <p><strong>Fecha requerida:</strong> ${fecha}</p>
         
@@ -508,8 +513,10 @@ async function enviarOrden() {
                 <tr style="background-color: #f8f9fa;">
                     <th style="padding: 12px; border: 1px solid #ddd; text-align: left;">Producto</th>
                     <th style="padding: 12px; border: 1px solid #ddd; text-align: center;">Cantidad</th>
-                    <th style="padding: 12px; border: 1px solid #ddd; text-align: right;">Precio Unitario</th>
-                    <th style="padding: 12px; border: 1px solid #ddd; text-align: right;">Subtotal</th>
+                    <th style="padding: 12px; border: 1px solid #ddd; text-align: right;">Precio Venta</th>
+                    <th style="padding: 12px; border: 1px solid #ddd; text-align: right;">Precio Costo</th>
+                    <th style="padding: 12px; border: 1px solid #ddd; text-align: right;">Subtotal Venta</th>
+                    <th style="padding: 12px; border: 1px solid #ddd; text-align: right;">Subtotal Costo</th>
                 </tr>
             </thead>
             <tbody>
@@ -519,9 +526,25 @@ async function enviarOrden() {
         
         <div style="margin-top: 20px;">
             <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                    <td style="padding: 10px; text-align: right; font-weight: bold;">Subtotal Venta:</td>
+                    <td style="padding: 10px; text-align: right; font-weight: bold;">Q${subtotal.toFixed(2)}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; text-align: right; font-weight: bold;">Envío:</td>
+                    <td style="padding: 10px; text-align: right; font-weight: bold;">Q30.00</td>
+                </tr>
                 <tr style="border-top: 2px solid #333;">
-                    <td style="padding: 15px; text-align: right; font-weight: bold; font-size: 20px;">Total:</td>
-                    <td style="padding: 15px; text-align: right; font-size: 24px; font-weight: bold; color: #c41e3a;">Q${total.toFixed(2)}</td>
+                    <td style="padding: 15px; text-align: right; font-weight: bold; font-size: 18px;">Total a Cobrar:</td>
+                    <td style="padding: 15px; text-align: right; font-size: 20px; font-weight: bold; color: #c41e3a;">Q${total.toFixed(2)}</td>
+                </tr>
+                <tr style="border-top: 1px solid #ddd;">
+                    <td style="padding: 10px; text-align: right; font-weight: bold;">Total Costo:</td>
+                    <td style="padding: 10px; text-align: right; font-weight: bold;">Q${totalPrecioR.toFixed(2)}</td>
+                </tr>
+                <tr style="border-top: 2px solid #28a745;">
+                    <td style="padding: 15px; text-align: right; font-weight: bold; font-size: 18px; color: #28a745;">Ganancia:</td>
+                    <td style="padding: 15px; text-align: right; font-size: 20px; font-weight: bold; color: #28a745;">Q${ganancia.toFixed(2)}</td>
                 </tr>
             </table>
         </div>
