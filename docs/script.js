@@ -3,8 +3,8 @@ const productos = [
     id: 1,
     titulo: "Misil de 36 tiros",
     descripcion: "Espectacular batería de 36 disparos consecutivos con efectos multicolor y destellos dorados. Ideal para celebraciones grandes.",
-    precio: 40,
-    precio_r: 40,
+    precio: 30,
+    precio_r: 20,
     imagen: "./assets/item1.jpeg"
   },
   {
@@ -35,7 +35,7 @@ const productos = [
     id: 7,
     titulo: "Girasoles",
     descripcion: "Caja de Girasoles con hermosos efectos giratorios con chispas doradas y verdes. Perfectos para decoración.",
-    precio: 10,
+    precio: 12.5,
     precio_r: 10,
     imagen: "./assets/item14.jpeg"
   },
@@ -43,7 +43,7 @@ const productos = [
     id: 8,
     titulo: "Colita de Raton",
     descripcion: "Clásicos fuegos artificiales con efecto serpenteante y chispas plateadas. Diversión garantizada para toda la familia.",
-    precio: 20,
+    precio: 25,
     precio_r: 20,
     imagen: "./assets/item8.jpeg"
   },
@@ -51,23 +51,23 @@ const productos = [
     id: 9,
     titulo: "Bateria de 19 tiros",
     descripcion: "Impresionante batería de 19 disparos con efectos variados: palmeras, crisantemos y efectos multicolor en secuencia.",
-    precio: 100,
+    precio: 110,
     precio_r: 100,
     imagen: "./assets/item9.jpeg"
   },
   {
     id: 10,
     titulo: "Paquete de estrellitas",
-    descripcion: "Conjunto de bengalas manuales que crean hermosas chispas plateadas. Perfectas para fotos y momentos especiales.",
-    precio: 25,
-    precio_r: 20,
+    descripcion: "(paquete) Conjunto de bengalas manuales que crean hermosas chispas plateadas. Perfectas para fotos y momentos especiales.",
+    precio: 30,
+    precio_r: 25,
     imagen: "./assets/item10.jpeg"
   },
   {
     id: 11,
     titulo: "Volcan Grande",
     descripcion: "Volcán de gran tamaño con efectos continuos de chispas doradas y plateadas. Espectáculo visual impresionante.",
-    precio: 20,
+    precio: 25,
     precio_r: 20,
     imagen: "./assets/item11.jpeg"
   },
@@ -75,15 +75,15 @@ const productos = [
     id: 12,
     titulo: "Palitos de chispas",
     descripcion: "Bengalas tradicionales de mano con chispas doradas brillantes. Ideales para niños",
-    precio: 15,
-    precio_r: 20,
+    precio: 12.50,
+    precio_r: 10,
     imagen: "./assets/item12.jpeg"
   },
   {
     id: 13,
     titulo: "Color smoke o Tronadores",
     descripcion: "Bomba de humo colorido disponible en varios colores vibrantes. Perfecta para efectos fotográficos y celebraciones.",
-    precio: 15,
+    precio: 12.50,
     precio_r: 10,
     imagen: "./assets/item13.jpeg"
   },
