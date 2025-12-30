@@ -35,7 +35,7 @@ const productos = [
     id: 7,
     titulo: "Girasoles",
     descripcion: "Caja de Girasoles con hermosos efectos giratorios con chispas doradas y verdes. Perfectos para decoración.",
-    precio: 12.5,
+    precio: 15,
     precio_r: 10,
     imagen: "./assets/item14.jpeg"
   },
@@ -75,7 +75,7 @@ const productos = [
     id: 12,
     titulo: "Palitos de chispas",
     descripcion: "Bengalas tradicionales de mano con chispas doradas brillantes. Ideales para niños",
-    precio: 12.50,
+    precio: 15,
     precio_r: 10,
     imagen: "./assets/item12.jpeg"
   },
@@ -83,8 +83,8 @@ const productos = [
     id: 13,
     titulo: "Color smoke o Tronadores",
     descripcion: "Caja con varias unidades de bombas de humo colorido disponible en varios colores vibrantes. Perfecta para efecto celebraciones.",
-    precio: 15,
-    precio_r: 10,
+    precio: 30,
+    precio_r: 25,
     imagen: "./assets/item13.jpeg"
   },
   {
