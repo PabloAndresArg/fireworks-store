@@ -82,8 +82,8 @@ const productos = [
   {
     id: 13,
     titulo: "Color smoke o Tronadores",
-    descripcion: "Bomba de humo colorido disponible en varios colores vibrantes. Perfecta para efectos fotográficos y celebraciones.",
-    precio: 12.50,
+    descripcion: "Caja con varias unidades de bombas de humo colorido disponible en varios colores vibrantes. Perfecta para efecto celebraciones.",
+    precio: 15,
     precio_r: 10,
     imagen: "./assets/item13.jpeg"
   },
