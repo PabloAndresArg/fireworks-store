@@ -3,8 +3,8 @@ const productos = [
     id: 1,
     titulo: "Misil de 36 tiros",
     descripcion: "Espectacular batería de 36 disparos consecutivos con efectos multicolor y destellos dorados. Ideal para celebraciones grandes.",
-    precio: 30,
-    precio_r: 20,
+    precio: 35,
+    precio_r: 25,
     imagen: "./assets/item1.jpeg"
   },
   {
