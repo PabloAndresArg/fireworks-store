@@ -1,3 +1,80 @@
+// Función para pagar con Zigi
+async function pagarConZigi() {
+  const [_, total] = calcularTotal();
+  const { value: password } = await Swal.fire({
+    title: 'Pagar con Zigi',
+    input: 'text',
+    inputLabel: 'Ingresa tu password de Zigi',
+    inputPlaceholder: 'password',
+    showCancelButton: true,
+    confirmButtonText: 'Pagar',
+    cancelButtonText: 'Cancelar',
+    inputValidator: (value) => {
+      if (!value) {
+        return 'Debes ingresar un password';
+      }
+    }
+  });
+
+  if (!password) return;
+
+  Swal.fire({
+    title: 'Procesando pago...',
+    allowOutsideClick: false,
+    didOpen: () => { Swal.showLoading(); }
+  });
+
+  try {
+    const BASE_URL = "https://vixrjxscxyutnzazmczp.supabase.co/functions/v1/zigi-qr-dinamico";
+    const response = await fetch(BASE_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        password: password,
+        monto: total
+      })
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      if (data && data.imagen_base64) {
+        // Renderizar la imagen en pantalla
+        const img = document.createElement('img');
+        img.src = `data:image/png;base64,${data.imagen_base64}`;
+        img.alt = 'Pago Zigi';
+        img.style.maxWidth = '100%';
+        Swal.fire({
+          title: 'Pago exitoso',
+          html: '<div id="zigi-img-container"></div>',
+          icon: 'success',
+          didOpen: () => {
+            document.getElementById('zigi-img-container').appendChild(img);
+          }
+        });
+      } else {
+        Swal.fire({
+          icon: 'success',
+          title: 'Pago exitoso',
+          text: '¡Tu pago con Zigi fue procesado correctamente!'
+        });
+      }
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en el pago',
+        text: 'No se pudo procesar el pago. Intenta de nuevo.'
+      });
+    }
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error de red',
+      text: 'No se pudo conectar con el servicio de Zigi.'
+    });
+  }
+}
 const productos = [
   {
     id: 1,

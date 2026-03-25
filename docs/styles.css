@@ -1,3 +1,32 @@
+/* Botón Zigi personalizado */
+.btn-zigi {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #c6ff2e;
+    color: #111;
+    border: none;
+    border-radius: 24px;
+    font-weight: bold;
+    font-size: 1.1em;
+    padding: 10px 22px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(198,255,46,0.18);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    outline: none;
+}
+.btn-zigi:hover {
+    background: #d7ff6b;
+    box-shadow: 0 4px 16px rgba(198,255,46,0.28);
+    transform: scale(1.04);
+}
+.btn-zigi img {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: transparent;
+    margin-right: 4px;
+}
 @import url('https://fonts.googleapis.com/css2?family=Mountains+of+Christmas&family=Nunito:wght@400;600;700&display=swap');
 
 body {
