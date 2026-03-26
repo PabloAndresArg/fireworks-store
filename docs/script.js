@@ -46,7 +46,7 @@ async function pagarConZigi() {
         img.alt = 'Pago Zigi';
         img.style.maxWidth = '100%';
         Swal.fire({
-          title: 'Pago exitoso',
+          title: 'Escanea el código QR para pagar',
           html: `<div id="zigi-img-container"></div><p>Referencia de pago: <b>${data.data.paymentRef}</b></p>`,
           icon: 'success',
           didOpen: () => {
