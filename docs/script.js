@@ -1,22 +1,22 @@
 // Función para pagar con Zigi
 async function pagarConZigi() {
   const [_, total] = calcularTotal();
-  const { value: password } = await Swal.fire({
+  const { value: secret } = await Swal.fire({
     title: 'Pagar con Zigi',
     input: 'text',
-    inputLabel: 'Ingresa tu password de Zigi',
-    inputPlaceholder: 'password',
+    inputLabel: 'Ingresa un Secret para continuar con el pago',
+    inputPlaceholder: 'Secret',
     showCancelButton: true,
     confirmButtonText: 'Pagar',
     cancelButtonText: 'Cancelar',
     inputValidator: (value) => {
       if (!value) {
-        return 'Debes ingresar un password';
+        return 'Debes ingresar un Secret';
       }
     }
   });
 
-  if (!password) return;
+  if (!secret) return;
 
   Swal.fire({
     title: 'Procesando pago...',
@@ -32,7 +32,7 @@ async function pagarConZigi() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        password: password,
+        password: secret,
         monto: total
       })
     });
