@@ -39,15 +39,15 @@ async function pagarConZigi() {
 
     if (response.ok) {
       const data = await response.json();
-      if (data && data.imagen_base64) {
+      if (data && data.data && data.data.generatedQR) {
         // Renderizar la imagen en pantalla
         const img = document.createElement('img');
-        img.src = `data:image/png;base64,${data.imagen_base64}`;
+        img.src = `${data.data.generatedQR}`;
         img.alt = 'Pago Zigi';
         img.style.maxWidth = '100%';
         Swal.fire({
           title: 'Pago exitoso',
-          html: '<div id="zigi-img-container"></div>',
+          html: `<div id="zigi-img-container"></div><p>Referencia de pago: <b>${data.data.paymentRef}</b></p>`,
           icon: 'success',
           didOpen: () => {
             document.getElementById('zigi-img-container').appendChild(img);
