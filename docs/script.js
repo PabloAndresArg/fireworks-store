@@ -37,6 +37,11 @@ async function pagarConZigi() {
       })
     });
 
+    if (response.status !== 201) {
+      console.error('Error en la respuesta:', response.status, await response.text());
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+
     if (response.ok) {
       const data = await response.json();
       if (data && data.data && data.data.generatedQR) {
