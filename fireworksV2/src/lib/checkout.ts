@@ -9,21 +9,13 @@ export type CustomerForm = {
   fullName: string
   email: string
   phone: string
-  requiredDate: string // AAAA-MM-DD, tal como lo entrega <input type="date">
 }
 
 export type Customer = CustomerForm
 
 export type CustomerErrors = Partial<Record<keyof CustomerForm, string>>
 
-export const emptyCustomer: CustomerForm = { fullName: '', email: '', phone: '', requiredDate: '' }
-
-// Fecha local de hoy en formato AAAA-MM-DD (toISOString usaría UTC y podría adelantar un día).
-export function todayIso() {
-  const d = new Date()
-  const pad = (n: number) => String(n).padStart(2, '0')
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`
-}
+export const emptyCustomer: CustomerForm = { fullName: '', email: '', phone: '' }
 
 export const PHONE_DIGITS = 8
 
@@ -55,9 +47,6 @@ export function validateCustomer(form: CustomerForm): CustomerErrors {
   else if (form.phone.length !== PHONE_DIGITS)
     errors.phone = `El celular debe tener exactamente ${PHONE_DIGITS} dígitos. Llevas ${form.phone.length}.`
 
-  if (!form.requiredDate) errors.requiredDate = 'Elige la fecha en que necesitas tu pedido.'
-  else if (form.requiredDate < todayIso()) errors.requiredDate = 'La fecha no puede ser anterior a hoy.'
-
   return errors
 }
 
@@ -76,6 +65,5 @@ export function toCustomer(form: CustomerForm): Customer {
     fullName: form.fullName.trim().replace(/\s+/g, ' '),
     email: form.email.trim().toLowerCase(),
     phone: formatPhone(form.phone),
-    requiredDate: form.requiredDate,
   }
 }

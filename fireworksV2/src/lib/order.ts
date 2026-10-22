@@ -6,7 +6,7 @@ import type { Customer } from './checkout'
 export {
   buildOrderHtml,
   buildOrderSubject,
-  formatDate,
+  DELIVERY_ESTIMATE,
   type Order,
   type OrderLine,
 } from '../../supabase/functions/_shared/order-email.ts'

@@ -31,7 +31,7 @@ export function Hero({ productCount }: HeroProps) {
       ))}
 
       <div ref={copyRef} className="hero-copy reveal">
-        <p className="eyebrow">Pirotecnia para Navidad y Año Nuevo</p>
+        <p className="eyebrow">Pirotecnia para Navidad, Año Nuevo y momentos especiales</p>
         <h1 className="hero-title">
           Todo para tu celebración,
           <br />
@@ -40,7 +40,7 @@ export function Hero({ productCount }: HeroProps) {
           al gran final
         </h1>
         <p className="hero-sub">
-          Pasteles, volcanes, bengalas y cohetillos de marcas como El Misil, Greatwall y Tigre
+          Baterías, volcanes, bengalas y cohetillos de marcas como El Misil, Greatwall y Tigre
           Brand. Elige cantidades y arma tu pedido en pocos minutos.
         </p>
         <a className="btn btn-primary" href="#catalogo">

@@ -112,7 +112,7 @@ export function CartDrawer({
             </span>
             <p className="empty-title">Tu carrito está vacío</p>
             <p className="empty-sub">
-              Elige pasteles, volcanes o bengalas del catálogo y aparecerán aquí con su total.
+              Elige baterías, volcanes o bengalas del catálogo y aparecerán aquí con su total.
             </p>
             <button type="button" className="btn btn-primary" onClick={goToCatalog}>
               Explorar el catálogo

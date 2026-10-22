@@ -4,16 +4,17 @@ import { useReveal } from '../hooks/useReveal'
 import { ProductCard } from './ProductCard'
 import { VideoModal } from './VideoModal'
 
+export type Filter = Category | 'todos'
+
 type CatalogProps = {
   products: Product[]
+  filter: Filter
+  onFilterChange: (filter: Filter) => void
   onAdd: (product: Product, quantity: number) => void
 }
 
-type Filter = Category | 'todos'
-
-export function Catalog({ products, onAdd }: CatalogProps) {
+export function Catalog({ products, filter, onFilterChange, onAdd }: CatalogProps) {
   const headRef = useReveal<HTMLDivElement>()
-  const [filter, setFilter] = useState<Filter>('todos')
   const [videoProduct, setVideoProduct] = useState<Product | null>(null)
 
   const visible = filter === 'todos' ? products : products.filter((p) => p.category === filter)
@@ -38,7 +39,7 @@ export function Catalog({ products, onAdd }: CatalogProps) {
             type="button"
             className="chip"
             aria-pressed={filter === f.id}
-            onClick={() => setFilter(f.id)}
+            onClick={() => onFilterChange(f.id)}
           >
             {f.label}
           </button>
@@ -62,7 +63,7 @@ export function Catalog({ products, onAdd }: CatalogProps) {
           <div className="empty">
             <p className="empty-title">Esta categoría todavía no tiene productos</p>
             <p className="empty-sub">Revisa las demás categorías o vuelve a ver todo el catálogo.</p>
-            <button type="button" className="btn btn-outline" onClick={() => setFilter('todos')}>
+            <button type="button" className="btn btn-outline" onClick={() => onFilterChange('todos')}>
               Ver todos los productos
             </button>
           </div>

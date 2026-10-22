@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2'
-import { formatDate, type Order } from './order'
+import { DELIVERY_ESTIMATE, type Order } from './order'
 import { formatPrice } from './format'
 import { OrderSendError, sendOrder } from './sendOrder'
 
@@ -38,7 +38,7 @@ function customerSummaryHtml(order: Order) {
       <p class="swal-customer">
         <strong>${escapeHtml(order.customer.fullName)}</strong><br />
         ${escapeHtml(order.customer.email)}<br />
-        ${escapeHtml(order.customer.phone)} · ${escapeHtml(formatDate(order.customer.requiredDate))}
+        ${escapeHtml(order.customer.phone)}
       </p>
       <ul class="swal-lines">${items}</ul>
       <dl class="swal-totals">
@@ -82,7 +82,7 @@ export async function confirmAndSendOrder(order: Order) {
     icon: 'success',
     iconColor: '#f5c542',
     title: 'Pedido enviado',
-    html: `Tu orden <strong>${escapeHtml(order.id)}</strong> quedó registrada. Te escribiremos al <strong>${escapeHtml(order.customer.phone)}</strong> para confirmar la entrega.`,
+    html: `Tu orden <strong>${escapeHtml(order.id)}</strong> quedó registrada y la entregaremos <strong>${DELIVERY_ESTIMATE}</strong>. Te escribiremos al <strong>${escapeHtml(order.customer.phone)}</strong> para coordinar la entrega.`,
     confirmButtonText: 'Listo',
   })
   return true

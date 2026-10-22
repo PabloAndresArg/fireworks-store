@@ -26,15 +26,6 @@ function amount(value: unknown, field: string) {
   return value
 }
 
-function isoDay(value: unknown, field: string) {
-  const v = text(value, field, { pattern: /^\d{4}-\d{2}-\d{2}$/ })
-  const d = new Date(`${v}T12:00:00Z`)
-  if (Number.isNaN(d.getTime()) || d.toISOString().slice(0, 10) !== v) {
-    throw new ValidationError(`La fecha ${field} no es válida.`)
-  }
-  return v
-}
-
 function line(value: unknown, index: number): Omit<OrderLine, 'subtotalSale' | 'subtotalCost'> {
   if (!isRecord(value)) throw new ValidationError(`El producto ${index + 1} no es válido.`)
   const quantity = value.quantity
@@ -74,7 +65,6 @@ export function parseOrder(body: unknown): Order {
       fullName,
       email: text(c.email, 'correo', { max: 254, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/ }).toLowerCase(),
       phone: text(c.phone, 'celular', { pattern: /^\d{4} \d{4}$/ }),
-      requiredDate: isoDay(c.requiredDate, 'requerida'),
     },
     ...computeTotals(o.lines.map(line), amount(o.shipping, 'envío')),
   }

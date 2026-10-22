@@ -4,7 +4,6 @@ import {
   PHONE_DIGITS,
   emptyCustomer,
   sanitizePhoneInput,
-  todayIso,
   toCustomer,
   validateCart,
   validateCustomer,
@@ -59,7 +58,7 @@ export function CheckoutForm({
     setSubmitted(true)
     if (Object.keys(errors).length > 0 || cartError) {
       // Lleva el foco al primer campo con error.
-      const first = (['fullName', 'email', 'phone', 'requiredDate'] as Field[]).find((f) => errors[f])
+      const first = (['fullName', 'email', 'phone'] as Field[]).find((f) => errors[f])
       if (first) document.getElementById(`checkout-${first}`)?.focus()
       return
     }
@@ -124,16 +123,6 @@ export function CheckoutForm({
           onChange={update('phone')}
           onBlur={blur('phone')}
           error={visibleError('phone')}
-        />
-        <TextField
-          id="checkout-requiredDate"
-          label="Fecha en que lo necesitas"
-          type="date"
-          min={todayIso()}
-          value={form.requiredDate}
-          onChange={update('requiredDate')}
-          onBlur={blur('requiredDate')}
-          error={visibleError('requiredDate')}
         />
       </div>
 

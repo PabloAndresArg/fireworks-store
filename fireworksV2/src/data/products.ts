@@ -1,10 +1,11 @@
 export type Category =
-  | 'pasteles'
+  | 'baterias'
   | 'volcanes'
   | 'luces'
   | 'truenos'
   | 'cohetes'
   | 'infantiles'
+  | 'combos'
 
 export type Product = {
   id: string
@@ -21,7 +22,8 @@ export type Product = {
 }
 
 export const categories: { id: Category; label: string }[] = [
-  { id: 'pasteles', label: 'Pasteles' },
+  { id: 'combos', label: 'Combos' },
+  { id: 'baterias', label: 'Baterías' },
   { id: 'volcanes', label: 'Volcanes y fuentes' },
   { id: 'luces', label: 'Luces y bengalas' },
   { id: 'truenos', label: 'Truenos' },
@@ -34,50 +36,50 @@ export const categories: { id: Category; label: string }[] = [
 export const products: Product[] = [
   {
     id: 'sol-y-luna',
-    name: 'Pastel Sol y Luna',
+    name: 'Batería Sol y Luna',
     description: '19 tiros con estallidos azules y dorados. Ideal para abrir el show.',
     price: 189.5,
     cost: 117.49,
     image: '/assets/item1.jpeg',
-    category: 'pasteles',
+    category: 'baterias',
     badge: 'Más vendido',
   },
   {
     id: 'zodiac-19',
-    name: 'Pastel Zodiac 19 efectos',
+    name: 'Batería Zodiac 19 efectos',
     description: 'Mil colores con crackling final. Incluye dos volcancitos de regalo.',
     price: 164.75,
     cost: 108.73,
     image: '/assets/item2.jpeg',
-    category: 'pasteles',
+    category: 'baterias',
   },
   {
     id: 'cielo-el-tauro',
-    name: 'Pastel Cielo El Tauro',
+    name: 'Batería Cielo El Tauro',
     description: 'Peonías rojas, moradas y rosadas que llenan el cielo por casi un minuto.',
     price: 212.25,
     cost: 125.23,
     image: '/assets/item9.jpeg',
-    category: 'pasteles',
+    category: 'baterias',
   },
   {
     id: 'peonias-multicolores',
     name: 'Peonías multicolores',
-    description: 'Pastel de estallidos tipo peonía en verde, rojo y azul.',
+    description: 'Batería de estallidos tipo peonía en verde, rojo y azul.',
     price: 147.9,
     cost: 100.57,
     image: '/assets/item20.jpeg',
-    category: 'pasteles',
+    category: 'baterias',
     badge: 'Nuevo',
   },
   {
     id: 'misil-25-49',
     name: 'Misil con crackling',
-    description: 'Pastel El Misil de 25 tiros. Pregunta por la versión de 49 tiros.',
+    description: 'Batería El Misil de 25 tiros. Pregunta por la versión de 49 tiros.',
     price: 118.4,
     cost: 75.78,
     image: '/assets/item24.jpeg',
-    category: 'pasteles',
+    category: 'baterias',
   },
   {
     id: 'volcan-luminoso',
@@ -278,5 +280,17 @@ export const products: Product[] = [
     cost: 11.13,
     image: '/assets/trompos.png',
     category: 'infantiles',
+  },
+  // Combo de ejemplo: precio con ~10% de descuento sobre la suma de sus productos (Q365.55).
+  {
+    id: 'combo-fiesta-familiar',
+    name: 'Combo Fiesta Familiar',
+    description:
+      'Batería Sol y Luna, Volcán luminoso, Super tronadores, bengalas de estrellas y colita de ratón.',
+    price: 329,
+    cost: 226.05,
+    image: '/assets/combo-fiesta-familiar.jpeg',
+    category: 'combos',
+    badge: 'Ahorra Q36',
   },
 ]
