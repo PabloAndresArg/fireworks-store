@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="t">
+  <title id="t">Repartidor en moto llevando un pedido de CuetesYa</title>
+  <rect width="800" height="600" fill="#1f1f1f"/>
+
+  <!-- Destellos -->
+  <g fill="#f5c542">
+    <path d="M640 110l8 22 22 8-22 8-8 22-8-22-22-8 22-8z"/>
+    <path d="M150 140l5 14 14 5-14 5-5 14-5-14-14-5 14-5z" opacity="0.7"/>
+    <path d="M720 230l4 10 10 4-10 4-4 10-4-10-10-4 10-4z" opacity="0.5"/>
+    <circle cx="560" cy="80" r="4" opacity="0.6"/>
+    <circle cx="300" cy="100" r="3" opacity="0.5"/>
+    <circle cx="90" cy="300" r="3" opacity="0.4"/>
+  </g>
+
+  <!-- Calle -->
+  <rect x="0" y="512" width="800" height="88" fill="#272727"/>
+  <g fill="#f5c542" opacity="0.35">
+    <rect x="40" y="552" width="90" height="8" rx="4"/>
+    <rect x="200" y="552" width="90" height="8" rx="4"/>
+    <rect x="360" y="552" width="90" height="8" rx="4"/>
+    <rect x="520" y="552" width="90" height="8" rx="4"/>
+    <rect x="680" y="552" width="90" height="8" rx="4"/>
+  </g>
+
+  <!-- Líneas de velocidad -->
+  <g stroke="#f5c542" stroke-linecap="round" stroke-width="8">
+    <line x1="40" y1="330" x2="150" y2="330" opacity="0.9"/>
+    <line x1="80" y1="380" x2="170" y2="380" opacity="0.6"/>
+    <line x1="20" y1="430" x2="130" y2="430" opacity="0.4"/>
+  </g>
+
+  <!-- Ruedas -->
+  <g>
+    <circle cx="270" cy="450" r="62" fill="#000" stroke="#313131" stroke-width="16"/>
+    <circle cx="270" cy="450" r="28" fill="none" stroke="#9b9b9b" stroke-width="6"/>
+    <circle cx="270" cy="450" r="10" fill="#f5c542"/>
+    <circle cx="580" cy="450" r="62" fill="#000" stroke="#313131" stroke-width="16"/>
+    <circle cx="580" cy="450" r="28" fill="none" stroke="#9b9b9b" stroke-width="6"/>
+    <circle cx="580" cy="450" r="10" fill="#f5c542"/>
+  </g>
+
+  <!-- Horquilla y manubrio -->
+  <path d="M580 450 L548 300" stroke="#9b9b9b" stroke-width="12" stroke-linecap="round"/>
+  <path d="M548 300 L520 286" stroke="#9b9b9b" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Carrocería del scooter -->
+  <path d="M206 420 Q214 352 290 350 L420 350 Q446 350 456 372 L500 300 Q508 286 524 290 L560 300 Q574 306 572 322 L560 398 Q556 422 532 424 Q506 380 456 392 L344 412 Q318 416 308 438 L226 440 Q206 440 206 420 Z" fill="#f5c542"/>
+  <path d="M290 350 L420 350 Q440 350 448 364 L330 364 Q306 364 290 350 Z" fill="#131209" opacity="0.35"/>
+  <!-- Faro -->
+  <circle cx="574" cy="318" r="14" fill="#ffffff"/>
+  <path d="M592 304 L660 286 M594 318 L668 318 M592 332 L660 350" stroke="#ffd970" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Caja de reparto -->
+  <rect x="186" y="236" width="136" height="112" rx="16" fill="#313131" stroke="#f5c542" stroke-width="5"/>
+  <path d="M254 262l9 24 24 9-24 9-9 24-9-24-24-9 24-9z" fill="#f5c542"/>
+
+  <!-- Repartidor -->
+  <!-- Pierna -->
+  <path d="M370 340 L462 352 L476 412" fill="none" stroke="#272727" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M462 404 L500 404 Q510 404 510 416 L510 424 L462 424 Z" fill="#000"/>
+  <!-- Torso -->
+  <path d="M352 344 Q346 282 392 240 Q414 222 438 236 Q458 250 450 278 L420 346 Z" fill="#272727"/>
+  <path d="M380 268 L444 290" stroke="#f5c542" stroke-width="8" stroke-linecap="round"/>
+  <!-- Brazo -->
+  <path d="M424 254 L486 292 L522 288" fill="none" stroke="#313131" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="524" cy="288" r="12" fill="#9b9b9b"/>
+  <!-- Casco -->
+  <circle cx="440" cy="196" r="42" fill="#f5c542"/>
+  <path d="M452 176 Q488 180 484 210 L456 210 Q446 194 452 176 Z" fill="#131209"/>
+  <path d="M406 186 Q420 158 452 156" fill="none" stroke="#ffd970" stroke-width="6" stroke-linecap="round"/>
+</svg>
