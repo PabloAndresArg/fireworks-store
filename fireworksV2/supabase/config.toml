@@ -1,0 +1,6 @@
+project_id = "fireworksv2"
+
+# La tienda es pública: la función no exige el JWT de Supabase.
+# Si prefieres exigirlo, ponlo en true y define VITE_SUPABASE_ANON_KEY en el .env del frontend.
+[functions.send-email---fireworks-]
+verify_jwt = false

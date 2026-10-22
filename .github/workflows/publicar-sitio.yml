@@ -1,0 +1,64 @@
+# Compila fireworksV2 y publica el resultado en docs/ (GitHub Pages sirve desde main /docs).
+name: Publicar sitio
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'fireworksV2/**'
+      - '.github/workflows/publicar-sitio.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publicar-sitio
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: fireworksV2/pnpm-lock.yaml
+
+      - name: Instalar dependencias
+        working-directory: fireworksV2
+        run: pnpm install --frozen-lockfile
+
+      - name: Compilar
+        working-directory: fireworksV2
+        env:
+          # Opcional: créalo en Settings > Secrets and variables > Actions si la función de Supabase lo pide.
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: pnpm build
+
+      - name: Copiar compilado a docs/
+        run: |
+          mkdir -p docs
+          # Borra lo anterior pero conserva el dominio propio (CNAME).
+          find docs -mindepth 1 ! -name CNAME -delete
+          cp -r fireworksV2/dist/. docs/
+          touch docs/.nojekyll
+
+      - name: Commit y push de docs/
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add -A docs
+          if git diff --cached --quiet; then
+            echo "Sin cambios en docs/"
+          else
+            git commit -m "Publicar sitio desde ${GITHUB_SHA::7}"
+            git push
+          fi
